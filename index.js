@@ -53,8 +53,10 @@ app.all("/", (req, res) => {
       user: req.user,
     });
   });
-
-  // topping:
+  
+// pizza:
+app.use('/pizzas', require('./src/routes/pizza'))
+// topping:
 app.use('/toppings', require('./src/routes/topping'))
 
 /* ------------------------------------------------------- */
