@@ -53,7 +53,9 @@ app.all("/", (req, res) => {
       user: req.user,
     });
   });
-  
+
+// order:
+app.use('/orders', require('./src/routes/order'))  
 // pizza:
 app.use('/pizzas', require('./src/routes/pizza'))
 // topping:
