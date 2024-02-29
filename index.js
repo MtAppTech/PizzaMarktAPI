@@ -48,6 +48,8 @@ app.all("/", (req, res) => {
     });
   });
 
+  // topping:
+app.use('/toppings', require('./src/routes/topping'))
 
 /* ------------------------------------------------------- */
 
