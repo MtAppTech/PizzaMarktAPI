@@ -3,9 +3,13 @@
     NODEJS EXPRESS | MtAppTech
 ------------------------------------------------------- */
 /*
+
     $ cp .env-sample .env
     $ npm init -y
     $ npm i express dotenv mongoose express-async-errors morgan
+    $ npm i jsonwebtoken
+    $ npm i swagger-autogen swagger-ui-express redoc-express
+    $ npm i nodemailer multer
     $ mkdir logs
     $ nodemon
 
