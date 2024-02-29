@@ -37,6 +37,9 @@ dbConnection();
 // Accept JSON:
 app.use(express.json());
 
+// morgan-logger:
+app.use(require("./src/middlewares/logger"));
+
 // res.getModelList:  // for get model list
 app.use(require("./src/middlewares/findSearchSortPage"));
 
