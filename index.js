@@ -24,3 +24,34 @@ const PORT = process.env?.PORT || 8000;
 require("express-async-errors");
 
 /* ------------------------------------------------------- */
+// Configrations:
+
+// Connect to DB:
+const { dbConnection } = require("./src/configs/dbConnection");
+dbConnection();
+
+/* ------------------------------------------------------- */
+
+// Middlewares:
+
+// Accept JSON:
+app.use(express.json());
+
+/* ------------------------------------------------------- */
+// Routes:
+// HomePath:
+app.all("/", (req, res) => {
+    res.send({
+      error: false,
+      message: "Welcome to PIZZA MARKT API",
+      user: req.user,
+    });
+  });
+
+
+/* ------------------------------------------------------- */
+
+// errorHandler:
+app.use(require("./src/middlewares/errorHandler"));
+  // RUN SERVER:
+app.listen(PORT, () => console.log("http://127.0.0.1:" + PORT));
