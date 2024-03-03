@@ -58,7 +58,10 @@ app.all("/", (req, res) => {
     });
   });
 
-// order:
+
+// user:
+app.use('/users', require('./src/routes/user'))
+  // order:
 app.use('/orders', require('./src/routes/order'))  
 // pizza:
 app.use('/pizzas', require('./src/routes/pizza'))
