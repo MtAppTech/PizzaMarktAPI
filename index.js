@@ -61,6 +61,8 @@ app.all("/", (req, res) => {
 
 // user:
 app.use('/users', require('./src/routes/user'))
+// token:
+app.use('/tokens', require('./src/routes/token'))
   // order:
 app.use('/orders', require('./src/routes/order'))  
 // pizza:
