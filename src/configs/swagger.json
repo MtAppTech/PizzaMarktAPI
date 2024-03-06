@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "REST API",
-    "description": "NODEJS EXPRESS",
+    "title": "Pizza Order Management System",
+    "description": "Pizza Order Management System",
     "termsOfService": "http://www.mtapptech.com/#",
     "contact": {
       "name": "",

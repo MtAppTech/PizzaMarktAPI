@@ -1,7 +1,8 @@
 {
   "name": "pizzamarktapi",
   "version": "1.0.0",
-  "description": "NODEJS EXPRESS",
+  "title": "Pizza Order Management System",
+  "description": "Pizza Order Management System",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
