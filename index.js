@@ -3,7 +3,7 @@
     NODEJS EXPRESS | MtAppTech
 ------------------------------------------------------- */
 /*
-
+  /*
     $ cp .env-sample .env
     $ npm init -y
     $ npm i express dotenv mongoose express-async-errors morgan
@@ -35,28 +35,30 @@ const { dbConnection } = require("./src/configs/dbConnection");
 dbConnection();
 
 /* ------------------------------------------------------- */
-
 // Middlewares:
 
 // Accept JSON:
 app.use(express.json());
 
+// Check Token:
+app.use(require('./src/middlewares/authentication'))
+
 // morgan-logger:
 app.use(require("./src/middlewares/logger"));
 
-// res.getModelList:  // for get model list
+// res.getModelList:  // get model listlerin calisabilmesi icin eklemek lazim
 app.use(require("./src/middlewares/findSearchSortPage"));
 
 /* ------------------------------------------------------- */
 // Routes:
 // HomePath:
 app.all("/", (req, res) => {
-    res.send({
-      error: false,
-      message: "Welcome to PIZZA MARKT API",
-      user: req.user,
-    });
+  res.send({
+    error: false,
+    message: "Welcome to PIZZA API",
+    user: req.user,
   });
+});
 
 // auth:
 app.use('/auth', require('./src/routes/auth'))
@@ -64,8 +66,8 @@ app.use('/auth', require('./src/routes/auth'))
 app.use('/users', require('./src/routes/user'))
 // token:
 app.use('/tokens', require('./src/routes/token'))
-  // order:
-app.use('/orders', require('./src/routes/order'))  
+// order:
+app.use('/orders', require('./src/routes/order'))
 // pizza:
 app.use('/pizzas', require('./src/routes/pizza'))
 // topping:
@@ -75,8 +77,10 @@ app.use('/toppings', require('./src/routes/topping'))
 
 // errorHandler:
 app.use(require("./src/middlewares/errorHandler"));
-  // RUN SERVER:
+
+// RUN SERVER:
 app.listen(PORT, () => console.log("http://127.0.0.1:" + PORT));
+
 /* ------------------------------------------------------- */
 // Syncronization (must be in commentLine):
-// require('./src/helpers/sync')() // !!! It clear database.
+ //require('./src/helpers/sync')() // !!! It clear database.
