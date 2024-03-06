@@ -52,13 +52,18 @@ app.use(require("./src/middlewares/findSearchSortPage"));
 /* ------------------------------------------------------- */
 // Routes:
 // HomePath:
-app.all("/", (req, res) => {
+app.all('/', (req, res) => {
   res.send({
-    error: false,
-    message: "Welcome to PIZZA API",
-    user: req.user,
-  });
-});
+      error: false,
+      message: 'Welcome to PIZZA API',
+      documents: {
+          swagger: "/documents/swagger",
+          redoc: "/documents/redoc",
+          json: "/documents/json",
+      },
+      user: req.user,
+  })
+})
 
 // auth:
 app.use('/auth', require('./src/routes/auth'))
@@ -72,6 +77,8 @@ app.use('/orders', require('./src/routes/order'))
 app.use('/pizzas', require('./src/routes/pizza'))
 // topping:
 app.use('/toppings', require('./src/routes/topping'))
+// document:
+app.use('/documents', require('./src/routes/document'))
 
 /* ------------------------------------------------------- */
 

@@ -1,6 +1,8 @@
 "use strict"
 /* -------------------------------------------------------
 	EXPRESS - Personnel API
+
+	% node swaggerAutogen.js
 ------------------------------------------------------- */
 require('dotenv').config()
 const HOST = process.env?.HOST || '127.0.0.1'
@@ -39,7 +41,7 @@ const document = {
 	},
 	security: [{ Token: [] }, { Bearer: [] }],
 	definitions: {
-		// Models:
+		// Models:  ADD models
 		"User": require('./src/models/user').schema.obj,
 		"Order": require('./src/models/order').schema.obj,
 		"Pizza": require('./src/models/pizza').schema.obj,
