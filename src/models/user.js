@@ -30,7 +30,12 @@ const UserSchema = new mongoose.Schema({
         required: true,
         set: (password) => passwordEncrypt(password)
     },
-
+    email: {
+        type: String,
+        trim: true,
+        required: true,
+        unique: true,
+    },
     isActive: {
         type: Boolean,
         default: true,
