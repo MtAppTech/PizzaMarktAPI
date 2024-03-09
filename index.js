@@ -41,7 +41,7 @@ dbConnection();
 app.use(express.json());
 
 // Check Token:
-app.use(require('./src/middlewares/authentication'))
+app.use(require("./src/middlewares/authentication"));
 
 // morgan-logger:
 app.use(require("./src/middlewares/logger"));
@@ -50,35 +50,76 @@ app.use(require("./src/middlewares/logger"));
 app.use(require("./src/middlewares/findSearchSortPage"));
 
 /* ------------------------------------------------------- */
-// Routes:
-// HomePath:
-app.all('/', (req, res) => {
-  res.send({
-      error: false,
-      message: 'Welcome to PIZZA API',
-      documents: {
-          swagger: "/documents/swagger",
-          redoc: "/documents/redoc",
-          json: "/documents/json",
-      },
-      user: req.user,
-  })
+
+// Sending E-Mail:
+// $ npm i nodemailer
+
+const nodemailer = require("nodemailer");
+
+//Create Test (Fake) Email Account
+//nodemailer.createTestAccount().then((email)=> console.log(email))
+/*
+{
+  user: 'u7wojd7ew54ujjzu@ethereal.email',
+  pass: 'huh2391F9wWuQQ26tF',
+  smtp: { host: 'smtp.ethereal.email', port: 587, secure: false },
+  imap: { host: 'imap.ethereal.email', port: 993, secure: true },
+  pop3: { host: 'pop3.ethereal.email', port: 995, secure: true },
+  web: 'https://ethereal.email'
+}
+*/
+// Connect to mail-server:
+const transporter = nodemailer.createTransport({
+  host: "smtp.ethereal.email",
+  port: 587,
+  secure: false, // true, tls, ssl
+  auth: {
+    user: 'u7wojd7ew54ujjzu@ethereal.email',
+    pass: 'huh2391F9wWuQQ26tF',
+  },
+});
+transporter.sendMail({
+  from: 'u7wojd7ew54ujjzu@ethereal.email',
+  to: 'mt.app.tech@gmail.com', // 'a@b.com, b@c.com'
+  subject: 'Hello',
+  // Message:
+  text: 'Hello There. How are you?',
+  html: '<b>Hello There.</b> <p>How are you?</p>',
+}, (error, success) => { 
+  error ? console.log('error:', error) : console.log('success:', success)
 })
 
+/* ------------------------------------------------------- */
+
+// Routes:
+// HomePath:
+app.all("/", (req, res) => {
+  res.send({
+    error: false,
+    message: "Welcome to PIZZA API",
+    documents: {
+      swagger: "/documents/swagger",
+      redoc: "/documents/redoc",
+      json: "/documents/json",
+    },
+    user: req.user,
+  });
+});
+
 // auth:
-app.use('/auth', require('./src/routes/auth'))
+app.use("/auth", require("./src/routes/auth"));
 // user:
-app.use('/users', require('./src/routes/user'))
+app.use("/users", require("./src/routes/user"));
 // token:
-app.use('/tokens', require('./src/routes/token'))
+app.use("/tokens", require("./src/routes/token"));
 // order:
-app.use('/orders', require('./src/routes/order'))
+app.use("/orders", require("./src/routes/order"));
 // pizza:
-app.use('/pizzas', require('./src/routes/pizza'))
+app.use("/pizzas", require("./src/routes/pizza"));
 // topping:
-app.use('/toppings', require('./src/routes/topping'))
+app.use("/toppings", require("./src/routes/topping"));
 // document:
-app.use('/documents', require('./src/routes/document'))
+app.use("/documents", require("./src/routes/document"));
 
 /* ------------------------------------------------------- */
 
@@ -90,4 +131,4 @@ app.listen(PORT, () => console.log("http://127.0.0.1:" + PORT));
 
 /* ------------------------------------------------------- */
 // Syncronization (must be in commentLine):
- //require('./src/helpers/sync')() // !!! It clear database.
+//require('./src/helpers/sync')() // !!! It clear database.
