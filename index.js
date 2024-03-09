@@ -69,6 +69,7 @@ const nodemailer = require("nodemailer");
 }
 */
 // Connect to mail-server:
+/*
 const transporter = nodemailer.createTransport({
   host: "smtp.ethereal.email",
   port: 587,
@@ -88,7 +89,30 @@ transporter.sendMail({
 }, (error, success) => { 
   error ? console.log('error:', error) : console.log('success:', success)
 })
+*/
 
+// //? GoogleMail (gmail):
+// //* Google -> AccountHome -> Security -> Two-Step-Verify -> App-Passwords
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "mt.app.tech@gmail.com",
+    pass: "0000 0000 0000 0000",
+  },
+});
+transporter.sendMail(
+  {
+    from: "mt.app.tech@gmail.com",
+    to: "murat.topal.ankara@gmail.com",
+    subject: "Hello",
+    text: "Hello There. How are you?",
+    html: "<b>Hello There.</b> <p>How are you?</p>",
+  },
+  (error, success) => {
+    error ? console.log("error:", error) : console.log("success:", success);
+  }
+);
 /* ------------------------------------------------------- */
 
 // Routes:
