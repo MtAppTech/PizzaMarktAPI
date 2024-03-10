@@ -58,15 +58,22 @@ module.exports = {
         #swagger.tags = ["Pizzas"]
         #swagger.summary = "Update Pizza"
     */
+    // console.log(req.body)
+    // upload:
+    // console.log('file', req.file) // upload.single
+    // console.log('files', req.files) // upload.array || upload.any
+
+    // set image from filename:
+    req.body.image = "images/" + req.file.originalname;
 
     const data = await Pizza.updateOne({ _id: req.params.id }, req.body, {
-      runValidators: true,                                                  // run validate update yaparken calismiyor, bunun calismasi icin
+      runValidators: true, // run validate update yaparken calismiyor, bunun calismasi icin
     });
 
     res.status(202).send({
       error: false,
       data,
-      new: await Pizza.findOne({ _id: req.params.id }),   // normlade güncelmis bilgiyi gondermez bunun icin tekrar talep ettik
+      new: await Pizza.findOne({ _id: req.params.id }), // normlade güncelmis bilgiyi gondermez bunun icin tekrar talep ettik
     });
   },
   delete: async (req, res) => {
@@ -75,14 +82,13 @@ module.exports = {
         #swagger.summary = "Delete Pizza"
     */
 
-    const data = await Pizza.deleteOne({ _id: req.params.id })
+    const data = await Pizza.deleteOne({ _id: req.params.id });
 
     res.status(data.deletedCount ? 204 : 404).send({
-        // error: false,
-        // error: (data.deletedCount ? false : true),
-        error: !data.deletedCount,
-        data
-    })
-
-},
+      // error: false,
+      // error: (data.deletedCount ? false : true),
+      error: !data.deletedCount,
+      data,
+    });
+  },
 };
