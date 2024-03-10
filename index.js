@@ -84,6 +84,9 @@ app.use("/toppings", require("./src/routes/topping"));
 // document:
 app.use("/documents", require("./src/routes/document"));
 
+// static-files:
+app.use('/images', express.static('./uploads'))
+
 /* ------------------------------------------------------- */
 
 // errorHandler:
